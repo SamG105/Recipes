@@ -12,7 +12,7 @@ struct RecipesApp: App {
     @StateObject var store = recipeStore()
     var body: some Scene {
         WindowGroup {
-            recipeListView(recipes: $store.recipes)
+            MainTabView(recipes: $store.recipes)
         }
     }
 }

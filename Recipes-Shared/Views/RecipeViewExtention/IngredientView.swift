@@ -21,13 +21,17 @@ struct IngredientView: View {
             }
             
             if let quantity = ingredient.countableMeasurement {
-                Text("\(quantity.unit) \(quantity.value)")
+                Text("\(quantity.value)")
             }
             if let mass = ingredient.massMeasurement {
-                Text("\(Int(mass.value)) \(mass.unit.symbol)")
+                if mass.value != 0{
+                    Text("\(mass.value.formatted()) \(mass.unit.symbol)")
+                }
             }
             if let volume = ingredient.volumeMeasurement {
-                Text("\(Int(volume.value)) \(volume.unit.symbol)")
+                if volume.value != 0 {
+                    Text("\(volume.value.formatted()) \(volume.unit.symbol)")
+                }
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
