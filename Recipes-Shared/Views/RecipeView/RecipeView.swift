@@ -24,11 +24,11 @@ struct RecipeView: View {
                         Spacer()
                         
                         IngredientsView(recipe: $recipe)
-                            .frame(width: geo.size.width - 30)
+                            //.frame(width: geo.size.width - 30)
                             .padding()
                         
                         Rectangle()
-                            .frame(width: geo.size.width - 30, height: 2)
+                            .frame(height: 2)
                             .cornerRadius(1)
                             .foregroundColor(recipe.theme.mainColor)
                         

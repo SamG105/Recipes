@@ -30,7 +30,14 @@ struct Recipe: Identifiable, Codable {
         }
     }*/
     var isFavorite: Bool
-    var image: UIImage?
+    var image: UIImage? {
+        get {
+            UIImage(data: imageData ?? Data())
+        }
+        set {
+            imageData = newValue?.pngData()
+        }
+    }
     var theme: Theme
     var description: String
     var notes: String = ""
@@ -50,7 +57,7 @@ struct Recipe: Identifiable, Codable {
         self.id = id
         self.name = name
         self.imageData = image.pngData()//image.asUIImage().pngData()
-        self.image = image
+        //self.image = UIImage(data: imageData ?? Data())
         self.isFavorite = isFavorite
         self.theme = theme
         self.description = description
@@ -85,6 +92,7 @@ struct Recipe: Identifiable, Codable {
         var countableMeasurement: quantity = quantity(value: 0, unit: "")
         
         static let empty = ingredient(name: "")
+        
     }
     
     //-MARK: Other

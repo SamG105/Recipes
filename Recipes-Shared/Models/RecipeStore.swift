@@ -5,7 +5,7 @@
 //  Created by Samuel Guay on 2023-05-26.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 class recipeStore: ObservableObject {
@@ -30,6 +30,10 @@ class recipeStore: ObservableObject {
         }
         let recipes = try await task.value
         self.recipes = recipes
+        
+        for var recipe in self.recipes {
+            recipe.image = UIImage(data: recipe.imageData ?? Data())
+        }
     }
     
     func save(scrums: [Recipe]) async throws {
