@@ -16,7 +16,6 @@ struct EditView: View {
             Section("Image") {
                 HStack {
                     Spacer()
-                    //DropZoneView(image: $recipe.image, fillColor: recipe.theme.mainColor)
                     DropZoneView(image: $recipe.image, fillColor: recipe.theme.mainColor )
                     Spacer()
                 }
@@ -25,7 +24,7 @@ struct EditView: View {
             Section("Ingredients") {
                 HStack {
                     Spacer()
-                    Button(action: {recipe.ingredients.append(Recipe.ingredient.empty)}) {
+                    Button(action: {recipe.ingredients.append(Recipe.ingredient(name: ""))}) {
                         Image(systemName: "plus.circle")
                     }
                   Spacer()
@@ -39,7 +38,7 @@ struct EditView: View {
             Section("Steps") {
                 HStack {
                     Spacer()
-                    Button(action: {recipe.steps.append(Recipe.step.empty)}) {
+                    Button(action: {recipe.steps.append(Recipe.step(text: ""))}) {
                         Image(systemName: "plus.circle")
                     }
                   Spacer()

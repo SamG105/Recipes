@@ -11,6 +11,7 @@ import SwiftUI
 struct RecipesApp: App {
     @StateObject private var store = recipeStore()
     @State private var errorWrapper: ErrorWrapper?
+    @Environment(\.dismiss) private var dismiss
     
     var body: some Scene {
         WindowGroup {
@@ -38,11 +39,8 @@ struct RecipesApp: App {
                                                 guidance: "Recipes will load samples and continue.")
                 }
             }
-            .sheet(item: $errorWrapper) {
-                //loads samples if no valid data
-                store.recipes = Recipe.sampleData
-            } content: { wrapper in
-                ErrorView(errorWrapper: wrapper)
+            .alert(item: $errorWrapper) { alert in
+                Alert(title: Text("An error has occurred!"), message: Text("\(alert.guidance) \n \(alert.error.localizedDescription) "), dismissButton: .cancel(Text("Dismiss"), action: {dismiss()}))
             }
         }
     }

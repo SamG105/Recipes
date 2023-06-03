@@ -13,7 +13,8 @@ struct RecipeHeaderView: View {
     
     var body: some View {
         VStack {
-            ImageView(image: Image(uiImage: recipe.image ?? UIImage()), backgroundColor: recipe.theme.mainColor, cornerRadius: 50)
+            ImageView(image: Image(uiImage: recipe.image ?? UIImage()) , backgroundColor: recipe.theme.mainColor, cornerRadius: 50)
+            //Image(uiImage: (UIImage(data: recipe.imageData ?? Data()) ?? UIImage(systemName: "plus")) ?? UIImage())
                 .ignoresSafeArea()
                 .shadow(color: recipe.theme.mainColor, radius: 25)
             
