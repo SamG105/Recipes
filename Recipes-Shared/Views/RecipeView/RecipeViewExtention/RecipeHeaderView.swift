@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeHeaderView: View {
-    var recipe: Recipe
+    @Binding var recipe: Recipe
     var geo: GeometryProxy
     
     var body: some View {
@@ -25,7 +25,19 @@ struct RecipeHeaderView: View {
                 .fontDesign(.rounded)
             
             Spacer()
-            RatingView(rating: recipe.rating )
+            HStack {
+                Spacer()
+                RatingView(rating: recipe.rating )
+                
+                Spacer()
+                Button{
+                    recipe.isFavorite.toggle()
+                } label: {
+                    Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(recipe.isFavorite ? .red : .black)
+                }
+                Spacer()
+            }
             
             ProprietiesView(recipe: recipe, geo: geo)
                 .padding()
@@ -36,7 +48,7 @@ struct RecipeHeaderView: View {
 struct RecipeHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            RecipeHeaderView(recipe: Recipe.sampleData[0], geo: geo)
+            RecipeHeaderView(recipe: .constant(Recipe.sampleData[0]), geo: geo)
         }
     }
 }

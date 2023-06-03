@@ -36,6 +36,7 @@
 		7EAD27A32A27BF7000C04646 /* IngredientsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD27A22A27BF7000C04646 /* IngredientsEditView.swift */; };
 		7EB7F4392A2B63F40027E0F6 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7F4382A2B63F40027E0F6 /* ErrorWrapper.swift */; };
 		7EB7F43B2A2B6C660027E0F6 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7F43A2A2B6C660027E0F6 /* ErrorView.swift */; };
+		7EB7F43D2A2B86400027E0F6 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7F43C2A2B86400027E0F6 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		7EAD27A22A27BF7000C04646 /* IngredientsEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsEditView.swift; sourceTree = "<group>"; };
 		7EB7F4382A2B63F40027E0F6 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		7EB7F43A2A2B6C660027E0F6 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		7EB7F43C2A2B86400027E0F6 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				7EAD27972A253EC600C04646 /* RecipeView */,
 				7EAD27932A22A5BB00C04646 /* GroceryView.swift */,
 				7EAD27952A22A85000C04646 /* TabView.swift */,
+				7EB7F43C2A2B86400027E0F6 /* FavoritesView.swift */,
 				7EB7F43A2A2B6C660027E0F6 /* ErrorView.swift */,
 			);
 			path = Views;
@@ -256,6 +259,7 @@
 				7EAD27A32A27BF7000C04646 /* IngredientsEditView.swift in Sources */,
 				7E04496C2A1E4D2000039EF7 /* ImageView.swift in Sources */,
 				7E0449662A1C089C00039EF7 /* Recipe+Struct.swift in Sources */,
+				7EB7F43D2A2B86400027E0F6 /* FavoritesView.swift in Sources */,
 				7EAD27892A225A1800C04646 /* StepsView.swift in Sources */,
 				7EAD279F2A254FC100C04646 /* EditViewGeneral.swift in Sources */,
 				7EAD27922A229C9700C04646 /* recipePreview.swift in Sources */,

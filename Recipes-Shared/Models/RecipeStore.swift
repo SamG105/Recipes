@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class recipeStore: ObservableObject {
     @Published var recipes: [Recipe] = Recipe.sampleData
     

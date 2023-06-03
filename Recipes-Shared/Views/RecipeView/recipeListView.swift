@@ -14,12 +14,15 @@ struct recipeListView: View {
     var body: some View {
         List($recipes) { $recipe in
             NavigationLink(destination: RecipeView(recipe: $recipe)) {
-                recipePreview(recipe: recipe)
+                recipePreview(recipe: $recipe)
                 
             }
             .contextMenu {
                 Button("Delete") {
                     recipes.removeAll(where: {$0.id == recipe.id && $0.name == recipe.name})
+                }
+                Button( recipe.isFavorite ? "Remove favourite" : "Make Favourite") {
+                    recipe.isFavorite.toggle()
                 }
             }
             .padding(.vertical, 5)

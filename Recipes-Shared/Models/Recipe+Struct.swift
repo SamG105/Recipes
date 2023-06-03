@@ -29,6 +29,7 @@ struct Recipe: Identifiable, Codable {
             imageData = uiImage.pngData()
         }
     }*/
+    var isFavorite: Bool
     var image: UIImage?
     var theme: Theme
     var description: String
@@ -45,11 +46,12 @@ struct Recipe: Identifiable, Codable {
     var steps: [step]
     
     
-    init(id: UUID = UUID(), name: String, image: UIImage, theme: Theme, description: String, notes: String = "", link: URL? = nil, rating: Double = 0, preparationTime: time, cookingTime: time, chillingTime: time, portion: quantity, canFreeze: Bool, ingredients: [ingredient], steps: [step]) {
+    init(id: UUID = UUID(), name: String, image: UIImage, theme: Theme, description: String, notes: String = "", link: URL? = nil, rating: Double = 0, preparationTime: time, cookingTime: time, chillingTime: time, portion: quantity, canFreeze: Bool, isFavorite: Bool = false, ingredients: [ingredient], steps: [step]) {
         self.id = id
         self.name = name
         self.imageData = image.pngData()//image.asUIImage().pngData()
         self.image = image
+        self.isFavorite = isFavorite
         self.theme = theme
         self.description = description
         self.notes = notes
@@ -99,7 +101,7 @@ struct Recipe: Identifiable, Codable {
     
     //-MARK: codable
     enum CodingKeys: String, CodingKey {
-        case id, name, imageData, theme, description, notes, link, rating, preparationTime, cookingTime, chillingTime, portion, canFreeze, ingredients, steps
+        case id, name, imageData, isFavorite, theme, description, notes, link, rating, preparationTime, cookingTime, chillingTime, portion, canFreeze, ingredients, steps
     }
     
     

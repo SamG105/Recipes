@@ -18,9 +18,13 @@ struct MainTabView: View {
         NavigationStack {
             TabView {
                 recipeListView(recipes: $recipes, isPresentingNewRecipeView: $isPresentingNewRecipeView)
-                
                     .tabItem {
                         Label("Recipes", systemImage: "list.bullet")
+                    }
+                
+                FavoritesView(recipes: $recipes)
+                    .tabItem {
+                        Label("Favourites", systemImage: "heart.fill")
                     }
                 GroceryView(recipes: $recipes)
                     .tabItem {

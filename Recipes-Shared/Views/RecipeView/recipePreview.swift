@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct recipePreview: View {
-    var recipe: Recipe
+    @Binding var recipe: Recipe
     var body: some View {
         VStack {
             Text(recipe.name)
@@ -16,9 +16,16 @@ struct recipePreview: View {
             Spacer()
             HStack {
                 Label("\((recipe.preparationTime.hours ) + (recipe.cookingTime.hours ) + (recipe.chillingTime.hours ))h \((recipe.preparationTime.minutes ) + (recipe.cookingTime.minutes ) + (recipe.chillingTime.minutes ))min", systemImage: "clock")
-                    .padding(.leading, 20)
+                    //.padding(.leading, 20)
                 Spacer()
                 RatingView(rating: recipe.rating )
+                //Spacer()
+                Button{
+                    recipe.isFavorite.toggle()
+                } label: {
+                    Image(systemName: recipe.isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(recipe.isFavorite ? .red : .black)
+                }
                 Spacer()
             }
         }
@@ -32,6 +39,7 @@ struct recipePreview: View {
 
 struct recipePreview_Previews: PreviewProvider {
     static var previews: some View {
-        recipePreview(recipe: Recipe.sampleData[0])
+        recipePreview(recipe: .constant(Recipe.sampleData[0]))
+            .frame(height: 10)
     }
 }

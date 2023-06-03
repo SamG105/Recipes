@@ -17,7 +17,7 @@ struct RecipeView: View {
             GeometryReader {geo in
                 ScrollView {
                     VStack {
-                        RecipeHeaderView(recipe: recipe, geo: geo)
+                        RecipeHeaderView(recipe: $recipe, geo: geo)
                         
                         Spacer()
                         Text(recipe.description)
