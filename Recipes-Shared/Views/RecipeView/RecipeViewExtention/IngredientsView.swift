@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IngredientsView: View {
-    @Binding var recipe: recipe
+    @Binding var recipe: Recipe
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct IngredientsView: View {
 struct IngredientsView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            IngredientsView(recipe: .constant(recipe.sampleData[0]))
+            IngredientsView(recipe: .constant(Recipe.sampleData[0]))
         }
     }
 }

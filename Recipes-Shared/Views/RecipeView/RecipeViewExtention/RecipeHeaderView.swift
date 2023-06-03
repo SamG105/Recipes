@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct RecipeHeaderView: View {
-    var recipe: recipe
+    var recipe: Recipe
     var geo: GeometryProxy
     
     var body: some View {
         VStack {
-            ImageView(image: Image("sample-Chocolate_Cookies"), backgroundColor: recipe.theme.mainColor)
+            ImageView(image: Image(uiImage: recipe.image ?? UIImage()), backgroundColor: recipe.theme.mainColor, cornerRadius: 50)
                 .ignoresSafeArea()
                 .shadow(color: recipe.theme.mainColor, radius: 25)
             
@@ -25,7 +25,7 @@ struct RecipeHeaderView: View {
                 .fontDesign(.rounded)
             
             Spacer()
-            RatingView(rating: recipe.rating ?? 0)
+            RatingView(rating: recipe.rating )
             
             ProprietiesView(recipe: recipe, geo: geo)
                 .padding()
@@ -36,7 +36,7 @@ struct RecipeHeaderView: View {
 struct RecipeHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            RecipeHeaderView(recipe: recipe.sampleData[0], geo: geo)
+            RecipeHeaderView(recipe: Recipe.sampleData[0], geo: geo)
         }
     }
 }

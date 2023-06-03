@@ -7,30 +7,34 @@
 
 import SwiftUI
 
-struct recipe: Identifiable, Codable {
+/// The basic thing in this app
+struct Recipe: Identifiable, Codable {
     //MARK: required
     var id = UUID()
+
     
     
     //MARK: Fields
     var name: String
     var imageData: Data?
-    var image: Image? {
+    /*var image: Image? {
         get {
             guard let data = imageData else { return nil }
             let uiImage: UIImage = UIImage(data: data)!
             return Image(uiImage: uiImage)
         }
         set {
-            let uiImage = newValue.asUIImage()
+            guard let value = newValue else {return}
+            let uiImage = value.asUIImage()
             imageData = uiImage.pngData()
         }
-    }
+    }*/
+    var image: UIImage?
     var theme: Theme
     var description: String
     var notes: String = ""
     var link: URL?
-    var rating: Double?
+    var rating: Double
     var preparationTime: time
     var cookingTime: time
     var chillingTime: time
@@ -41,10 +45,11 @@ struct recipe: Identifiable, Codable {
     var steps: [step]
     
     
-    init(id: UUID = UUID(), name: String, image: Image, theme: Theme, description: String, notes: String = "", link: URL? = nil, rating: Double? = nil, preparationTime: time, cookingTime: time, chillingTime: time, portion: quantity, canFreeze: Bool, ingredients: [ingredient], steps: [step]) {
+    init(id: UUID = UUID(), name: String, image: UIImage, theme: Theme, description: String, notes: String = "", link: URL? = nil, rating: Double = 0, preparationTime: time, cookingTime: time, chillingTime: time, portion: quantity, canFreeze: Bool, ingredients: [ingredient], steps: [step]) {
         self.id = id
         self.name = name
-        self.imageData = image.asUIImage().pngData()
+        self.imageData = image.pngData()//image.asUIImage().pngData()
+        self.image = image
         self.theme = theme
         self.description = description
         self.notes = notes
@@ -64,6 +69,7 @@ struct recipe: Identifiable, Codable {
         var id = UUID()
         var isDone = Bool()
         var text: String
+        static let empty = step(text: "")
     }
     
     //-MARK: Ingredients
@@ -72,26 +78,40 @@ struct recipe: Identifiable, Codable {
         
         var name: String
         var isOnList = Bool()
-        var massMeasurement: Measurement<UnitMass>?
-        var volumeMeasurement: Measurement<UnitVolume>?
-        var countableMeasurement: quantity?
+        var massMeasurement: Measurement<UnitMass> = Measurement(value: 0, unit: .grams)
+        var volumeMeasurement: Measurement<UnitVolume> = Measurement(value: 0, unit: .cups)
+        var countableMeasurement: quantity = quantity(value: 0, unit: "")
+        
+        static let empty = ingredient(name: "")
     }
     
+    //-MARK: Other
     
     struct time: Codable {
-        var hours: Int?
-        var minutes: Int?
+        var hours: Int = 0
+        var minutes: Int = 0
     }
     struct quantity: Codable {
         var value: Int
         var unit: String
     }
+    
+    
+    //-MARK: codable
+    enum CodingKeys: String, CodingKey {
+        case id, name, imageData, theme, description, notes, link, rating, preparationTime, cookingTime, chillingTime, portion, canFreeze, ingredients, steps
+    }
+    
+    
+    static let emptyRecipe = Recipe(name: "", image: UIImage(), theme: .cuisine, description: "", preparationTime: time(), cookingTime: time(), chillingTime: time(), portion: quantity(value: 0, unit: ""), canFreeze: false, ingredients: [], steps: [])
+    
 }
 
-extension recipe {
-    static let sampleData: [recipe] = [
-        recipe(name: "Chewy Chocolate Chip Cookies (The Best)",
-               image: Image("sample-Chocolate_Cookies"),
+//-MARK: sampleData
+extension Recipe {
+    static let sampleData: [Recipe] = [
+        Recipe(name: "Chewy Chocolate Chip Cookies (The Best)",
+               image: (UIImage(named: "sample-Chocolate_Cookies") ?? UIImage(systemName: "plus.circle")) ?? UIImage(),//Image("sample-Chocolate_Cookies").asUIImage(),
                theme: .peanutButter,
                description: "The best chocolate cookies, from Ricardo",
                link: URL(string: "https://www.ricardocuisine.com/en/recipes/4874-chewy-chocolate-chip-cookies-the-best"),
@@ -119,8 +139,8 @@ extension recipe {
                
               ),
         
-        recipe(name: "Classic Brownies",
-               image: Image("sample-Classic-Brownies"),
+        Recipe(name: "Classic Brownies",
+               image: UIImage(named: "sample-Classic-Brownies") ?? UIImage(),
                theme: .cake,
                description: "",
                preparationTime: time(minutes: 15),
@@ -147,7 +167,7 @@ extension recipe {
     ]
 }
 
-
+//-MARK: extentions
 extension Bool {
     func asString() -> String {
         switch self {
@@ -156,5 +176,17 @@ extension Bool {
         case false :
             return "No"
         }
+    }
+}
+
+extension UnitMass: CaseIterable {
+    public static var allCases: [UnitMass] {
+        return [.grams, .ounces, .carats, .centigrams, .decigrams, .kilograms, .metricTons, .micrograms, .milligrams, .nanograms, .ouncesTroy, .picograms, .pounds, .shortTons, .slugs, .stones]
+    }
+}
+
+extension UnitVolume: CaseIterable {
+    public static var allCases: [UnitVolume] {
+        return [.cups, .teaspoons, .tablespoons, .fluidOunces, .acreFeet, .bushels, .centiliters, .cubicCentimeters, .cubicDecimeters, .cubicFeet, .cubicInches, .cubicKilometers, .cubicMeters, .cubicMiles, .cubicMillimeters, .cubicYards , .deciliters, .gallons, .imperialFluidOunces, .imperialGallons, .imperialPints, .imperialQuarts, .imperialTablespoons, .imperialTeaspoons, .kiloliters, .liters, .megaliters, .metricCups, .milliliters, .pints, .quarts]
     }
 }

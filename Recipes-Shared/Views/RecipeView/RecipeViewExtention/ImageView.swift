@@ -10,6 +10,7 @@ import SwiftUI
 struct ImageView: View {
     var image: Image
     var backgroundColor: Color
+    var cornerRadius: CGFloat
     
     var body: some View {
         ZStack {
@@ -18,17 +19,17 @@ struct ImageView: View {
             image
                 .resizable()
                 .scaledToFit()
-                .cornerRadius(50)
+                .cornerRadius(cornerRadius)
                 .padding(10)
                 
         }
-        .cornerRadius(50)
+        .cornerRadius(cornerRadius)
     }
 }
 
 struct ImageView_Previews: PreviewProvider {
-    static let tester = recipe.sampleData[0]
+    static let tester = Recipe.sampleData[0]
     static var previews: some View {
-        ImageView(image: Image("sample-Chocolate_Cookies"), backgroundColor: tester.theme.mainColor)
+        ImageView(image: Image("sample-Chocolate_Cookies"), backgroundColor: tester.theme.mainColor, cornerRadius: 50)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProprietiesView: View {
-    var recipe: recipe
+    var recipe: Recipe
     var geo: GeometryProxy
     
     var body: some View {
@@ -52,7 +52,7 @@ struct ProprietiesView: View {
 struct ProprietiesView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            ProprietiesView(recipe: recipe.sampleData[0], geo: geo)
+            ProprietiesView(recipe: Recipe.sampleData[0], geo: geo)
         }
     }
 }

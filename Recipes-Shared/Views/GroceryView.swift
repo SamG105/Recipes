@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GroceryView: View {
-    @Binding var recipes: [recipe]
+    @Binding var recipes: [Recipe]
     var body: some View {
         List($recipes) { $ListRecipe in
             if ListRecipe.ingredients.filter({$0.isOnList == true}).count != 0 {
@@ -47,7 +47,7 @@ struct GroceryView: View {
 struct GrocerysView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            GroceryView(recipes: .constant(recipe.sampleData))
+            GroceryView(recipes: .constant(Recipe.sampleData))
         }
     }
 }

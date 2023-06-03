@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IngredientView: View {
-    @Binding var ingredient: recipe.ingredient
+    @Binding var ingredient: Recipe.ingredient
     var theme: Theme
     
     var body: some View {
@@ -21,7 +21,9 @@ struct IngredientView: View {
             }
             
             if let quantity = ingredient.countableMeasurement {
-                Text("\(quantity.value)")
+                if quantity.value != 0 {
+                    Text("\(quantity.value)")
+                }
             }
             if let mass = ingredient.massMeasurement {
                 if mass.value != 0{
@@ -52,6 +54,6 @@ struct IngredientView: View {
 
 struct IngredientView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientView(ingredient: .constant(recipe.sampleData[0].ingredients[0]), theme: .orange)
+        IngredientView(ingredient: .constant(Recipe.sampleData[0].ingredients[0]), theme: .orange)
     }
 }

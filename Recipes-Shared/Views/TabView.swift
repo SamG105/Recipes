@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @Binding var recipes: [recipe]
+    @Binding var recipes: [Recipe]
+    @State private var isPresentingNewRecipeView = false
+    @Environment(\.scenePhase) private var scenePhase
+    let saveAction: ()->Void
+    @State var newRecipe = Recipe.emptyRecipe
+    
     var body: some View {
         NavigationStack {
             TabView {
-                recipeListView(recipes: $recipes)
+                recipeListView(recipes: $recipes, isPresentingNewRecipeView: $isPresentingNewRecipeView)
                 
                     .tabItem {
                         Label("Recipes", systemImage: "list.bullet")
@@ -23,12 +28,19 @@ struct MainTabView: View {
                     }
             }
         }
+        .sheet(isPresented: $isPresentingNewRecipeView) {
+            NewRecipeView(recipes: $recipes, isPresentingNewRecipeView: $isPresentingNewRecipeView)
+            //EditView(recipe: $newRecipe, isSaving: $isPresentingNewRecipeView)
+        }
+        .onChange(of: scenePhase) {phase in
+            if phase == .inactive {saveAction()}
+        }
     }
 }
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
         
-        MainTabView(recipes: .constant(recipe.sampleData))
+        MainTabView(recipes: .constant(Recipe.sampleData), saveAction: {})
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StepView: View {
-    @Binding var step: recipe.step
+    @Binding var step: Recipe.step
     var theme: Theme
     
     var body: some View {
@@ -32,6 +32,6 @@ struct StepView: View {
 
 struct StepView_Previews: PreviewProvider {
     static var previews: some View {
-        StepView(step: .constant(recipe.sampleData[0].steps[0]), theme: .peanutButter)
+        StepView(step: .constant(Recipe.sampleData[0].steps[0]), theme: .peanutButter)
     }
 }

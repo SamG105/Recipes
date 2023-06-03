@@ -11,7 +11,7 @@ extension ProprietiesView {
     struct gridItemView: View {
         var topText: String
         var bottomText: String?
-        var time: recipe.time?
+        var time: Recipe.time?
         var theme: Theme
         
         var body: some View {
@@ -30,12 +30,16 @@ extension ProprietiesView {
                     if let time = time {
                         HStack {
                             if let Hrs = time.hours {
-                                Text("\(Hrs) H")
-                                    .font(.headline)
+                                if Hrs != 0 {
+                                    Text("\(Hrs) H")
+                                        .font(.headline)
+                                }
                             }
                             if let Min = time.minutes {
-                                Text("\(Min) min")
-                                    .font(.headline)
+                                if Min != 0 {
+                                    Text("\(Min) min")
+                                        .font(.headline)
+                                }
                             }
                         }
                     }
@@ -52,7 +56,7 @@ extension ProprietiesView {
 }
 struct ProprietiesViewGridItem_Previews: PreviewProvider {
     static var previews: some View {
-        ProprietiesView.gridItemView(topText: "Quantity", time: recipe.time(hours: 1, minutes: 2), theme: .peanutButter)
+        ProprietiesView.gridItemView(topText: "Quantity", time: Recipe.time(hours: 1, minutes: 2), theme: .peanutButter)
             .frame(width: 125, height: 50)
     }
 }
