@@ -6,29 +6,19 @@
 //
 
 import SwiftUI
+#if os(watchOS)
 
-/// The basic thing in this app
+#endif
+
+/// Declares Recipe a type holding the proprieties of a recipe
 struct Recipe: Identifiable, Codable {
     //MARK: required
     var id = UUID()
 
     
-    
     //MARK: Fields
     var name: String
     var imageData: Data?
-    /*var image: Image? {
-        get {
-            guard let data = imageData else { return nil }
-            let uiImage: UIImage = UIImage(data: data)!
-            return Image(uiImage: uiImage)
-        }
-        set {
-            guard let value = newValue else {return}
-            let uiImage = value.asUIImage()
-            imageData = uiImage.pngData()
-        }
-    }*/
     var isFavorite: Bool
     var image: UIImage? {
         get {
@@ -53,10 +43,10 @@ struct Recipe: Identifiable, Codable {
     var steps: [step]
     
     
-    init(id: UUID = UUID(), name: String, image: UIImage, theme: Theme, description: String, notes: String = "", link: URL? = nil, rating: Double = 0, preparationTime: time, cookingTime: time, chillingTime: time, portion: quantity, canFreeze: Bool, isFavorite: Bool = false, ingredients: [ingredient], steps: [step]) {
+    init(id: UUID = UUID(), name: String, image: UIImage?, theme: Theme, description: String, notes: String = "", link: URL? = nil, rating: Double = 0, preparationTime: time, cookingTime: time, chillingTime: time, portion: quantity, canFreeze: Bool, isFavorite: Bool = false, ingredients: [ingredient], steps: [step]) {
         self.id = id
         self.name = name
-        self.imageData = image.pngData()//image.asUIImage().pngData()
+        self.imageData = image?.pngData() ?? UIImage().pngData()//image.asUIImage().pngData()
         //self.image = UIImage(data: imageData ?? Data())
         self.isFavorite = isFavorite
         self.theme = theme
@@ -91,7 +81,9 @@ struct Recipe: Identifiable, Codable {
         var volumeMeasurement: Measurement<UnitVolume> = Measurement(value: 0, unit: .cups)
         var countableMeasurement: quantity = quantity(value: 0, unit: "")
         
-        static let empty = ingredient(name: "")
+        static let empty = ingredient(name: "", isEditing: true)
+        
+        var isEditing: Bool = false
         
     }
     
@@ -105,7 +97,6 @@ struct Recipe: Identifiable, Codable {
         var value: Int
         var unit: String
     }
-    
     
     //-MARK: codable
     enum CodingKeys: String, CodingKey {
@@ -191,12 +182,12 @@ extension Bool {
 
 extension UnitMass: CaseIterable {
     public static var allCases: [UnitMass] {
-        return [.grams, .ounces, .carats, .centigrams, .decigrams, .kilograms, .metricTons, .micrograms, .milligrams, .nanograms, .ouncesTroy, .picograms, .pounds, .shortTons, .slugs, .stones]
+        return [.grams, .ounces, .carats, .kilograms, .metricTons, .milligrams, .pounds, .shortTons,]
     }
 }
 
 extension UnitVolume: CaseIterable {
     public static var allCases: [UnitVolume] {
-        return [.cups, .teaspoons, .tablespoons, .fluidOunces, .acreFeet, .bushels, .centiliters, .cubicCentimeters, .cubicDecimeters, .cubicFeet, .cubicInches, .cubicKilometers, .cubicMeters, .cubicMiles, .cubicMillimeters, .cubicYards , .deciliters, .gallons, .imperialFluidOunces, .imperialGallons, .imperialPints, .imperialQuarts, .imperialTablespoons, .imperialTeaspoons, .kiloliters, .liters, .megaliters, .metricCups, .milliliters, .pints, .quarts]
+        return [.cups, .teaspoons, .tablespoons, .fluidOunces, .cubicCentimeters, .cubicFeet, .cubicInches, .cubicMeters, .cubicMillimeters, .gallons, .imperialGallons, .imperialPints, .imperialQuarts, .liters, .metricCups, .milliliters]
     }
 }

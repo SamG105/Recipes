@@ -6,6 +6,8 @@
 //
 
 import Foundation
+#if os(watchOS)
+#endif
 
 struct ErrorWrapper: Identifiable {
     let id: UUID

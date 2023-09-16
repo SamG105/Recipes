@@ -15,26 +15,30 @@ struct MainTabView: View {
     @State var newRecipe = Recipe.emptyRecipe
     
     var body: some View {
-        NavigationStack {
-            TabView {
-                recipeListView(recipes: $recipes, isPresentingNewRecipeView: $isPresentingNewRecipeView)
-                    .tabItem {
-                        Label("Recipes", systemImage: "list.bullet")
-                    }
-                
-                FavoritesView(recipes: $recipes)
-                    .tabItem {
-                        Label("Favourites", systemImage: "heart.fill")
-                    }
-                GroceryView(recipes: $recipes)
-                    .tabItem {
-                        Label("Grocery", systemImage: "list.bullet")
-                    }
-            }
+        //NavigationStack {
+        TabView {
+            recipeListView(recipes: $recipes, isPresentingNewRecipeView: $isPresentingNewRecipeView)
+                .tabItem {
+                    Label("Recipes", systemImage: "text.book.closed.fill")
+                }
+            
+            PublicStoreView()
+                .tabItem {
+                    Label("Store", systemImage: "list.bullet.below.rectangle")
+                }
+            
+            FavoritesView(recipes: $recipes)
+                .tabItem {
+                    Label("Favourites", systemImage: "heart.fill")
+                }
+            GroceryView(recipes: $recipes)
+                .tabItem {
+                    Label("Grocery", systemImage: "list.bullet")
+                }
         }
+        //}
         .sheet(isPresented: $isPresentingNewRecipeView) {
             NewRecipeView(recipes: $recipes, isPresentingNewRecipeView: $isPresentingNewRecipeView)
-            //EditView(recipe: $newRecipe, isSaving: $isPresentingNewRecipeView)
         }
         .onChange(of: scenePhase) {phase in
             if phase == .inactive {saveAction()}
@@ -44,7 +48,6 @@ struct MainTabView: View {
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
-        
         MainTabView(recipes: .constant(Recipe.sampleData), saveAction: {})
     }
 }

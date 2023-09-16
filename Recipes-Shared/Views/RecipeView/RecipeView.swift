@@ -47,15 +47,15 @@ struct RecipeView: View {
                 }
                 //.ignoresSafeArea()
             }
-            .offset(y: -40)
+            .offset(y: -30)
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
+                /*ToolbarItem(placement: .bottomBar) {
                     Button("Delete") {
                         recipeStore().recipes.removeAll(where: {$0.id == recipe.id && $0.name == recipe.name})
                     }
                     .buttonStyle(.bordered)
-                }
-                ToolbarItem(placement: .bottomBar) {
+                }*/
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Edit") {
                         isPresentingEditView = true
                         editingRecipe = recipe
@@ -65,8 +65,9 @@ struct RecipeView: View {
             }
             .sheet(isPresented: $isPresentingEditView) {
                 NavigationStack {
-                    EditView(recipe: $editingRecipe, isSaving: $isPresentingEditView)
-                        .navigationTitle(recipe.name)
+                    //EditView(recipe: $editingRecipe, isSaving: $isPresentingEditView)
+                    RecipeEditView(recipe: $editingRecipe)
+                        //.navigationTitle(recipe.name)
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel") {

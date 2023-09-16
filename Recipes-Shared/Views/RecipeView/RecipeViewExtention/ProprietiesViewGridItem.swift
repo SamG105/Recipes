@@ -29,17 +29,13 @@ extension ProprietiesView {
                     
                     if let time = time {
                         HStack {
-                            if let Hrs = time.hours {
-                                if Hrs != 0 {
-                                    Text("\(Hrs) H")
-                                        .font(.headline)
-                                }
+                            if time.hours != 0 {
+                                Text("\(time.hours) H")
+                                    .font(.headline)
                             }
-                            if let Min = time.minutes {
-                                if Min != 0 {
-                                    Text("\(Min) min")
-                                        .font(.headline)
-                                }
+                            if time.minutes != 0 {
+                                Text("\(time.minutes) min")
+                                    .font(.headline)
                             }
                         }
                     }

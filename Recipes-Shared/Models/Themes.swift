@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if os(watchOS)
+
+#endif
 
 enum Theme: String, Identifiable, Codable, CaseIterable {
     case carrot

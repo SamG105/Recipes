@@ -14,7 +14,8 @@ struct NewRecipeView: View {
     
     var body: some View {
         NavigationStack {
-            EditView(recipe: $newRecipe, isSaving: $isPresentingNewRecipeView)
+            //EditView(recipe: $newRecipe, isSaving: $isPresentingNewRecipeView)
+            RecipeEditView(recipe: $newRecipe)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Dismiss") {
