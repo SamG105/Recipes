@@ -11,22 +11,24 @@ struct FavoritesView: View {
     @Binding var recipes: [Recipe]
     
     var body: some View {
-        List($recipes) { $recipe in
-            if recipe.isFavorite == true {
-                NavigationLink(destination: RecipeView(recipe: $recipe)) {
-                    recipePreview(recipe: $recipe)
-                    
-                }
-                .contextMenu {
-                    Button("Delete") {
-                        recipes.removeAll(where: {$0.id == recipe.id && $0.name == recipe.name})
+        NavigationStack {
+            List($recipes) { $recipe in
+                if recipe.isFavorite == true {
+                    NavigationLink(destination: RecipeView(recipe: $recipe)) {
+                        recipePreview(recipe: $recipe)
+                        
                     }
+                    .contextMenu {
+                        Button("Delete") {
+                            recipes.removeAll(where: {$0.id == recipe.id && $0.name == recipe.name})
+                        }
+                    }
+                    .padding(.vertical, 5)
+                    .listRowBackground(recipe.theme.mainColor)
                 }
-                .padding(.vertical, 5)
-                .listRowBackground(recipe.theme.mainColor)
             }
+            .navigationTitle("Favorites")
         }
-        .navigationTitle("Favorites")
     }
 }
 

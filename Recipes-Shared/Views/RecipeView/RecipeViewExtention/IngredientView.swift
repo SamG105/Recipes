@@ -20,29 +20,24 @@ struct IngredientView: View {
                     .foregroundColor(ingredient.isOnList ? theme.accentColor : theme.accentColor)
             }
             
-            if let quantity = ingredient.countableMeasurement {
-                if quantity.value != 0 {
-                    Text("\(quantity.value)")
-                }
+            if ingredient.countableMeasurement.value != 0 {
+                Text("\(ingredient.countableMeasurement.value)")
             }
-            if let mass = ingredient.massMeasurement {
-                if mass.value != 0{
-                    Text("\(mass.value.formatted()) \(mass.unit.symbol)")
-                }
+            
+            if ingredient.massMeasurement.value != 0{
+                Text("\(ingredient.massMeasurement.value.formatted()) \(ingredient.massMeasurement.unit.symbol)")
             }
-            if let volume = ingredient.volumeMeasurement {
-                if volume.value != 0 {
-                    Text("\(volume.value.formatted()) \(volume.unit.symbol)")
-                }
+            if ingredient.volumeMeasurement.value != 0 {
+                Text("\(ingredient.volumeMeasurement.value.formatted()) \(ingredient.volumeMeasurement.unit.symbol)")
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
                 Text(ingredient.name)
-                    //.minimumScaleFactor(0.9)
+                //.minimumScaleFactor(0.9)
                     .padding(.leading, 15)
             }
             //.frame(width: 50)
-           // Spacer()
+            // Spacer()
         }
         .frame(height: 15)
         .padding()
