@@ -114,6 +114,7 @@
 		7E0449712A200ACF00039EF7 /* IngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsView.swift; sourceTree = "<group>"; };
 		7E0449732A200DA400039EF7 /* IngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientView.swift; sourceTree = "<group>"; };
 		7E0449752A20DC5800039EF7 /* RecipeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStore.swift; sourceTree = "<group>"; };
+		7E3B84352A4A2C2300B3DE92 /* RecipesBackend */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RecipesBackend; sourceTree = "<group>"; };
 		7E3B843F2A4B8A4400B3DE92 /* MainContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContent.swift; sourceTree = "<group>"; };
 		7E3B84412A4B8C9B00B3DE92 /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		7E60D3932AB5E41700561EFC /* RecipesBackend */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RecipesBackend; path = ../../../Documents/RecipesBackend; sourceTree = "<group>"; };
